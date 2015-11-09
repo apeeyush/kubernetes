@@ -2532,6 +2532,18 @@ func autoconvert_api_ResourceRequirements_To_v1_ResourceRequirements(in *api.Res
 	} else {
 		out.Requests = nil
 	}
+	if in.SoftRequests != nil {
+		out.SoftRequests = make(ResourceList)
+		for key, val := range in.SoftRequests {
+			newVal := resource.Quantity{}
+			if err := s.Convert(&val, &newVal, 0); err != nil {
+				return err
+			}
+			out.SoftRequests[ResourceName(key)] = newVal
+		}
+	} else {
+		out.SoftRequests = nil
+	}
 	return nil
 }
 
@@ -5557,6 +5569,18 @@ func autoconvert_v1_ResourceRequirements_To_api_ResourceRequirements(in *Resourc
 		}
 	} else {
 		out.Requests = nil
+	}
+	if in.SoftRequests != nil {
+		out.SoftRequests = make(api.ResourceList)
+		for key, val := range in.SoftRequests {
+			newVal := resource.Quantity{}
+			if err := s.Convert(&val, &newVal, 0); err != nil {
+				return err
+			}
+			out.SoftRequests[api.ResourceName(key)] = newVal
+		}
+	} else {
+		out.SoftRequests = nil
 	}
 	return nil
 }

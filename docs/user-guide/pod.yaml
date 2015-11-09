@@ -10,3 +10,8 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
+    resources:
+      limits:
+        cpu: "0.5"
+      softRequests:
+        cpu: "0.4"
