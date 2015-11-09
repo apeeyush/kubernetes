@@ -13,5 +13,7 @@ spec:
     resources:
       limits:
         cpu: "0.5"
+        memory: "50G"
       softRequests:
         cpu: "0.4"
+        memory: "1G"
